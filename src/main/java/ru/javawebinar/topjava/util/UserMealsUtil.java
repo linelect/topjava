@@ -50,7 +50,6 @@ public class UserMealsUtil {
 
                 )));
 
-        for (UserMealWithExceed um : resultList) System.out.println(um);
         return resultList;
     }
 }

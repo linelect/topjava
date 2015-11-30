@@ -44,7 +44,7 @@ public class UserMealsUtil {
                         (groupedCaloriesByDay.get(s.getDateTime().toLocalDate()) > caloriesPerDay)
 
                 ))
-                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+                .collect(Collectors.toList());
 
     }
 }

@@ -21,7 +21,7 @@
     <table>
         <tr>
             <td>Date and time:</td>
-            <td><input type="text" name="dateTime" value="${dateTime}"></td>
+            <td><input type="datetime" name="dateTime" value="${dateTime}"></td>
         </tr>
 
         <tr>
@@ -31,7 +31,7 @@
 
         <tr>
             <td>Calories</td>
-            <td><input type="text" name="calories" value="${calories}"/>
+            <td><input type="number" name="calories" value="${calories}"/>
                 <input type="hidden" name="id" value="${id}"/></td>
         </tr>
     </table>

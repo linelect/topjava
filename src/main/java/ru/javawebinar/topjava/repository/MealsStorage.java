@@ -63,14 +63,14 @@ public class MealsStorage {
         mealsMap.remove(id);
     }
 
-    public List<UserMeal> list() {
+    public List<UserMeal> getAll() {
         List<UserMeal> resultList = new ArrayList<>();
         for (Map.Entry<Integer, UserMeal> um : mealsMap.entrySet()) resultList.add(um.getValue());
         return resultList;
     }
 
     public List<UserMealWithExceed> listWithExceed() {
-        List<UserMeal> mealList = list();
+        List<UserMeal> mealList = getAll();
         Map<LocalDate, Integer> caloriesSumByDate = mealList.stream().collect(Collectors.groupingBy(um -> um.getDateTime().toLocalDate(),
                 Collectors.summingInt(UserMeal::getCalories)));
 

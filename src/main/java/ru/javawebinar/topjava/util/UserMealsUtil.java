@@ -19,7 +19,7 @@ public class UserMealsUtil {
 
     public static void main(String[] args) {
         MealsStorage mealsStorage = MealsStorage.getInstance();
-        List<UserMeal> mealList = mealsStorage.list();
+        List<UserMeal> mealList = mealsStorage.getAll();
 
         List<UserMealWithExceed> filteredMealsWithExceeded = getFilteredMealsWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), caloriesPerDay);
         filteredMealsWithExceeded.forEach(System.out::println);

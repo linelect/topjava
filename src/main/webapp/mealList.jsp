@@ -53,8 +53,8 @@
     </thead>
     <tbody>
     <c:forEach items="${meals}" var="meal">
-        <c:url var="editUrl" value="./meals?do=edit&id=${meal.getId()}" />
-        <c:url var="deleteUrl" value="./meals?do=delete&id=${meal.getId()}" />
+        <c:url var="editUrl" value="./meals?do=edit&id=${meal.id}" />
+        <c:url var="deleteUrl" value="./meals?do=delete&id=${meal.id}" />
         <tr <c:if test="${meal.exceed}">bgcolor="#db7093" </c:if>>
             <td><c:out value="${meal.dateTime}" /> </td>
             <td><c:out value="${meal.description}" /></td>

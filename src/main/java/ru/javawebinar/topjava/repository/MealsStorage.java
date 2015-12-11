@@ -7,10 +7,7 @@ import ru.javawebinar.topjava.util.UserMealsUtil;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MealsStorage {
@@ -64,9 +61,7 @@ public class MealsStorage {
     }
 
     public List<UserMeal> getAll() {
-        List<UserMeal> resultList = new ArrayList<>();
-        for (Map.Entry<Integer, UserMeal> um : mealsMap.entrySet()) resultList.add(um.getValue());
-        return resultList;
+        return new ArrayList<UserMeal>(mealsMap.values());
     }
 
     public List<UserMealWithExceed> listWithExceed() {

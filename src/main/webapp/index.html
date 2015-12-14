@@ -7,9 +7,19 @@
 <body>
 <h2>Проект "<a href="https://github.com/JavaWebinar/topjava05" target="_blank">Top Java"</a></h2>
 <hr>
+<h2>Select user for login</h2>
+
+<form method="post" action="users">
+    <select name="userId">
+        <option value="1">Admin</option>
+        <option value="2">User</option>
+    </select>
+    <button type="submit">Login</button>
+</form>
+<hr>
 <ul>
-<li><a href="users">User List</a></li>
-<li><a href="meals">Meal List</a></li>
+    <li><a href="users">User List</a></li>
+    <li><a href="meals">Meal List</a></li>
 </ul>
 </body>
 </html>

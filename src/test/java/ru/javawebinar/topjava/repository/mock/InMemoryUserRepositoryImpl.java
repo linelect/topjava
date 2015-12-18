@@ -2,7 +2,6 @@ package ru.javawebinar.topjava.repository.mock;
 
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.LoggerWrapper;
-import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
@@ -28,14 +27,6 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     public static final Comparator<User> USER_COMPARATOR = (u1, u2) -> u1.getName().compareTo(u2.getName());
-
-    public static final int USER_ID = 1;
-    public static final int ADMIN_ID = 2;
-
-    {
-        save(new User(USER_ID, "User", "user@yandex.ru", "password", Role.ROLE_USER));
-        save(new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN));
-    }
 
     @PostConstruct
     public void postConstruct() {

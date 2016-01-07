@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.repository.datajpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
 
@@ -19,10 +20,22 @@ public class DataJpaUserMealRepositoryImpl implements UserMealRepository{
     @Autowired
     private ProxyUserMealRepository proxy;
 
+    @Autowired
+    private ProxyUserRepository proxyUserRepository;
+
     @Override
     public UserMeal save(UserMeal userMeal, int userId) {
-        userMeal.setId(userId);
-        return proxy.save(userMeal);
+        User user = proxyUserRepository.findOne(userId);
+        userMeal.setUser(user);
+        if (userMeal.isNew()) {
+            return proxy.save(userMeal);
+        } else {
+            if (get(userMeal.getId(), userId) == null) {
+                return null;
+            } else {
+                return (proxy.update(userMeal.getId(), userId, userMeal.getDateTime(), userMeal.getCalories(), userMeal.getDescription()) == 0 ? null : userMeal);
+            }
+        }
     }
 
     @Override

@@ -22,11 +22,19 @@ public interface ProxyUserMealRepository extends JpaRepository<UserMeal, Integer
     @Transactional
     @Modifying
     @Query(name = UserMeal.DELETE)
-//    @Query("DELETE FROM User u WHERE u.id=:id")
     int delete(@Param("id") int id, @Param("userId") int userId);
 
-    @Override
+    @Modifying
     @Transactional
+    @Query("UPDATE UserMeal set dateTime=:dateTime, calories=:calories, description=:description WHERE id=:id and user.id=:userId")
+    int update(@Param("id") int id,
+                    @Param("userId") int userId,
+                    @Param("dateTime") LocalDateTime dateTime,
+                    @Param("calories") int calories,
+                    @Param("description") String description);
+
+    @Transactional
+    @Override
     UserMeal save(UserMeal userMeal);
 
     @Query(name = UserMeal.GET)

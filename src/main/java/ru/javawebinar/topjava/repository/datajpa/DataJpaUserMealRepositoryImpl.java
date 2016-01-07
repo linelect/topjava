@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.repository.datajpa;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
@@ -13,28 +15,33 @@ import java.util.List;
  */
 @Repository
 public class DataJpaUserMealRepositoryImpl implements UserMealRepository{
+
+    @Autowired
+    private ProxyUserMealRepository proxy;
+
     @Override
     public UserMeal save(UserMeal userMeal, int userId) {
-        return null;
+        userMeal.setId(userId);
+        return proxy.save(userMeal);
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return false;
+        return proxy.delete(id, userId) != 0;
     }
 
     @Override
     public UserMeal get(int id, int userId) {
-        return null;
+        return proxy.findOne(id, userId);
     }
 
     @Override
     public List<UserMeal> getAll(int userId) {
-        return null;
+        return proxy.findAll(userId);
     }
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return null;
+        return proxy.getBetween(userId, startDate, endDate);
     }
 }

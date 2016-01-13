@@ -15,6 +15,7 @@ import ru.javawebinar.topjava.service.UserMealService;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 @Controller
@@ -33,15 +34,15 @@ public class MealController {
     }
 
     @RequestMapping(value = "/meals/add", method = RequestMethod.GET)
-    public String getAddMeal(Model model) {
+    public String getAddMeal(Model model, HttpServletRequest request) {
         UserMeal userMeal = new UserMeal(LocalDateTime.now(), "", 1000);
         model.addAttribute("meal", userMeal);
         return "mealEdit";
     }
 
     @RequestMapping(value = "/meals/add", method = RequestMethod.POST)
-    public String addMeal(UserMeal userMeal, BindingResult result, ModelMap model) {
-        userMeal.setDateTime(LocalDateTime.now());
+    public String addMeal(UserMeal userMeal, BindingResult result, ModelMap model, HttpServletRequest request) {
+        userMeal.setDateTime(LocalDateTime.parse(request.getParameter("dateTime")));
         userMeal.setUser(userService.get(LoggedUser.id()));
         userMealService.save(userMeal, LoggedUser.id());
         return "redirect:/meals";
@@ -61,8 +62,8 @@ public class MealController {
     }
 
     @RequestMapping(value = "/meals/update", method = RequestMethod.POST)
-    public String updateMeal(UserMeal userMeal, BindingResult result, ModelMap model) {
-        userMeal.setDateTime(LocalDateTime.now());
+    public String updateMeal(UserMeal userMeal, BindingResult result, ModelMap model, HttpServletRequest request) {
+        userMeal.setDateTime(LocalDateTime.parse(request.getParameter("dateTime")));
         userMeal.setUser(userService.get(LoggedUser.id()));
         userMealService.update(userMeal, LoggedUser.id());
         return "redirect:/meals";

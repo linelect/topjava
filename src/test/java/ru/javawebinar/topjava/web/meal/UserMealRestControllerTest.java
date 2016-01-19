@@ -33,8 +33,8 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 public class UserMealRestControllerTest extends AbstractControllerTest {
 
-//    public static final String REST_URL = UserMealRestController.REST_URL + '/';
-    public static final String REST_URL = "/rest/meal/";
+    public static final String REST_URL = UserMealRestController.REST_URL + '/';
+//    public static final String REST_URL = "/rest/meal/";
 
     @Autowired
     protected UserMealService userMealService;
@@ -55,6 +55,6 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk());
         ArrayList<UserMeal> mealsAfterDelete = new ArrayList<>(USER_MEALS);
         mealsAfterDelete.remove(MEAL1);
-        MATCHER.assertCollectionEquals(mealsAfterDelete, userMealService.getAll(MEAL1.getUser().getId()));
+        MATCHER.assertCollectionEquals(mealsAfterDelete, userMealService.getAll(USER_ID));
     }
 }

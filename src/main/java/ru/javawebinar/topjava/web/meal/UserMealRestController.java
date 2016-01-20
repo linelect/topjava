@@ -12,8 +12,12 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.to.UserMealWithExceed;
 
 import org.springframework.web.bind.annotation.RestController;
+import ru.javawebinar.topjava.util.TimeUtil;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -57,4 +61,11 @@ public class UserMealRestController extends AbstractUserMealController {
         super.update(userMeal, id);
     }
 
+    @RequestMapping(value = "/getBetween/{startDate}/{endDate}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UserMealWithExceed> getBetween(@PathVariable("startDate") String startDate, @PathVariable("endDate") String endDate) {
+        LocalDateTime stDate = LocalDateTime.parse(startDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        LocalDateTime enDate = LocalDateTime.parse(endDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        return super.getBetween(stDate.toLocalDate(), stDate.toLocalTime(), enDate.toLocalDate(), enDate.toLocalTime());
+    }
 }

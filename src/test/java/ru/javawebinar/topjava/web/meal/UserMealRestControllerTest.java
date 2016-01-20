@@ -107,7 +107,7 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
     public void testGetBetween() throws Exception {
         String startDate = MEAL1.getDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         String endDate = MEAL1.getDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        TestUtil.print(mockMvc.perform(get(REST_URL + "getBetween/"+startDate+"/"+endDate).contentType(MediaType.APPLICATION_JSON))
+        TestUtil.print(mockMvc.perform(get(REST_URL + "getBetween/?startDate="+startDate+"&endDate="+endDate).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MealTestData.MATCHER_WITH_EXCEED.contentListMatcher(UserMealsUtil.getWithExceeded(Collections.singletonList(MEAL1), UserMealsUtil.DEFAULT_CALORIES_PER_DAY))));

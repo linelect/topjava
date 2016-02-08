@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.to.UserTo;
 
 /**
  * GKislin
@@ -27,8 +28,9 @@ public class ProfileRestController extends AbstractUserController {
         super.delete(LoggedUser.id());
     }
 
-    public void update(@RequestBody User user) {
-        super.update(user, LoggedUser.id());
+    public void update(@RequestBody UserTo userTo) {
+        userTo.setId(LoggedUser.id());
+        super.update(userTo);
     }
 
     @RequestMapping(value = "/text", method = RequestMethod.GET)

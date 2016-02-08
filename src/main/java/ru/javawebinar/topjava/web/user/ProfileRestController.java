@@ -29,6 +29,7 @@ public class ProfileRestController extends AbstractUserController implements Exc
         super.delete(LoggedUser.id());
     }
 
+    @RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody UserTo userTo) {
         userTo.setId(LoggedUser.id());
         super.update(userTo);
